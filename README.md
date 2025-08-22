@@ -99,7 +99,7 @@ Este módulo contiene toda la funcionalidad de autenticación, usuarios, permiso
 ## Módulo 7 - Therapists
 
 
-# Tablas - Independientes
+# Tablas - Ubicaciones
 
 ## Distrito
 
