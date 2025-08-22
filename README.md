@@ -56,3 +56,51 @@ Este módulo contiene toda la funcionalidad de autenticación, usuarios, permiso
 |district,             |	  VARCHAR(100)	   |		        	      |
 |address,              |	  TEXT		       |		        	      |
 |profile_picture       |	  VARCHAR(255)	   |		        	      |
+
+
+
+
+
+## Módulo 7 - Therapists
+
+
+# Tablas - Independientes
+
+## Distrito
+
+| **Atributos** | **Tipos de Datos** | **Descripción** |
+|---------------|--------------------|-----------------|
+| Id            | AutoField (PK)     | Identificador único del distrito |
+| name          | VARCHAR(20)        | Nombre del distrito |
+| province      | VARCHAR(20)        | Relación con la provincia a la que pertenece |
+| deleted_at    | Date               | Fecha de eliminación lógica (soft delete) |
+| ubigeo_code   | INTEGER            | Código UBIGEO de 6 dígitos |
+| created_at    | VARCHAR            | Fecha de creación del registro |
+| updated_at    | VARCHAR(20)        | Última fecha de actualización |
+
+---
+
+## Province
+
+| **Atributos** | **Tipos de Datos** | **Descripción** |
+|---------------|--------------------|-----------------|
+| Id            | AutoField (PK)     | Identificador único de la provincia |
+| name          | CharField          | Nombre de la provincia |
+| región        | VARCHAR(20)        | Relación con la región a la que pertenece |
+| deleted_at    | DateTimeField      | Fecha de eliminación lógica (soft delete) |
+| ubigeo_code   | INTEGER            | Código UBIGEO de 4 dígitos |
+| created_at    | DateTimeField      | Fecha de creación del registro |
+| updated_at    | DateTimeField      | Última fecha de actualización |
+
+---
+
+## Región
+
+| **Atributos** | **Tipos de Datos** | **Descripción** |
+|---------------|--------------------|-----------------|
+| Id            | AutoField (PK)     | Identificador único de la región |
+| name          | CharField          | Nombre de la región |
+| deleted_at    | DateTimeField      | Fecha de eliminación lógica (soft delete) |
+| ubigeo_code   | INTEGER            | Código UBIGEO de 2 dígitos |
+| created_at    | DateTimeField      | Fecha de creación del registro |
+| updated_at    | DateTimeField      | Última fecha de actualización |
