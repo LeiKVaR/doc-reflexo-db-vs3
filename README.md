@@ -26,9 +26,44 @@ Este módulo contiene toda la funcionalidad de autenticación, usuarios, permiso
 
 ## Módulo 2 - 
 
+## User
+
+| **Atributos**        | **Tipos de Datos** | **Descripción** |
+|----------------------|--------------------|-----------------|
+| id                   | INT(20)            | PRIMARY KEY, AUTO_INCREMENT, NOT NULL |
+| password             | VARCHAR(128)       | NOT NULL |
+| last_login           | DATETIME(6)        | NULL (puede ser NULL hasta el primer login) |
+| is_superuser         | TINYINT(1)         | NOT NULL, por defecto 0 (FALSE) |
+| username             | VARCHAR(150)       | UNIQUE, NOT NULL, validación alfanumérica (máx. 150 caracteres) |
+| first_name           | VARCHAR(150)       | NOT NULL, valores permitidos: 'M', 'F', 'O', 'P' |
+| last_name            | VARCHAR(150)       | CNOT NULL |
+| email                | VARCHAR(254)       | UNIQUE, NOT NULL |
+| is_staff             | TINYINT(1)         | NOT NULL, por defecto 0 (FALSE) |
+| is_active            | TINYINT(1)          | NOT NULL, por defecto 1 (TRUE) |
+| receive_notifications| BOOLEAN (tinyint(1)) | NOT NULL, DEFAULT 1 |
+| date_joined          | DATETIME(6)       | NOT NULL, se asigna automáticamente al crear el usuario |
 
 
 
+--- 
+
+## User Profiles
+
+| **Atributos**        | **Tipos de Datos** | **Descripción** |
+|----------------------|--------------------|-----------------|
+| id                   | INT(20)           | PRIMARY KEY, AUTO_INCREMENT, NOT NULL |
+| user_id              | BIGINT            | UNIQUE, FOREIGN KEY → users(id), NOT NULL, ON DELETE CASCADE|
+| first_name           | VARCHAR(50)       | NOT NULL |
+| paternal_lastname    | VARCHAR(50)       | NOT NULL |
+| maternal_lastname    | VARCHAR(50)       | NOT NULL |
+| gender               | CHAR(1)           | NOT NULL, valores permitidos: 'M', 'F', 'O', 'P' |
+| email                | VARCHAR(254)      | CNOT NULL |
+| is_public            | BOOLEAN           | NOT NULL, DEFAULT 1 |
+| show_email           | BOOLEAN           | NOT NULL, DEFAULT 0 |
+| show_phone           | BOOLEAN           | NOT NULL, DEFAULT 0 |
+| receive_notifications| BOOLEAN (tinyint(1)) | NOT NULL, DEFAULT 1 |
+| created_at           | DATETIME(6)       | NOT NULL, AUTO SET al crear |
+| updated_at           | DATETIME(6)       | NOT NULL, AUTO UPDATE al modificar |
 
 
 
@@ -56,3 +91,51 @@ Este módulo contiene toda la funcionalidad de autenticación, usuarios, permiso
 |district,             |	  VARCHAR(100)	   |		        	      |
 |address,              |	  TEXT		       |		        	      |
 |profile_picture       |	  VARCHAR(255)	   |		        	      |
+
+
+
+
+
+## Módulo 7 - Therapists
+
+
+# Tablas - Ubicaciones
+
+## Distrito
+
+| **Atributos** | **Tipos de Datos** | **Descripción** |
+|---------------|--------------------|-----------------|
+| Id            | AutoField (PK)     | PRIMARY KEY, AUTO_INCREMENT, NOT NULL |
+| name          | VARCHAR(20)        | NOT NULL |
+| province      | VARCHAR(20)        | FOREIGN KEY → province(id), NOT NULL, ON DELETE CASCADE |
+| deleted_at    | Date               | NULL permitido (para soft delete) |
+| ubigeo_code   | INTEGER            | UNIQUE, NOT NULL, longitud 6 dígitos |
+| created_at    | VARCHAR            | NOT NULL, DEFAULT CURRENT_TIMESTAMP |
+| updated_at    | VARCHAR(20)        | NOT NULL, ON UPDATE CURRENT_TIMESTAMP |
+
+---
+
+## Province
+
+| **Atributos** | **Tipos de Datos** | **Descripción** |
+|---------------|--------------------|-----------------|
+| Id            | AutoField (PK)     | PRIMARY KEY, AUTO_INCREMENT, NOT NULL |
+| name          | CharField          | NOT NULL |
+| región        | VARCHAR(20)        | FOREIGN KEY → region(id), NOT NULL, ON DELETE CASCADE |
+| deleted_at    | DateTimeField      | NULL permitido (para soft delete) |
+| ubigeo_code   | INTEGER            | UNIQUE, NOT NULL, longitud 4 dígitos |
+| created_at    | DateTimeField      | NOT NULL, DEFAULT CURRENT_TIMESTAMP |
+| updated_at    | DateTimeField      | NOT NULL, ON UPDATE CURRENT_TIMESTAMP |
+
+---
+
+## Región
+
+| **Atributos** | **Tipos de Datos** | **Descripción** |
+|---------------|--------------------|-----------------|
+| Id            | AutoField (PK)     | PRIMARY KEY, AUTO_INCREMENT, NOT NULL |
+| name          | CharField          | NOT NULL |
+| deleted_at    | DateTimeField      | NULL permitido (para soft delete) |
+| ubigeo_code   | INTEGER            | UNIQUE, NOT NULL, longitud 2 dígitos |
+| created_at    | DateTimeField      | NOT NULL, DEFAULT CURRENT_TIMESTAMP |
+| updated_at    | DateTimeField      | NOT NULL, ON UPDATE CURRENT_TIMESTAMP |
